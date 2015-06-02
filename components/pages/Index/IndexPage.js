@@ -12,8 +12,13 @@ export default React.createClass({
 
     render : function() {
         var tasks = [
-            <tr key="0"><td>{"--- End of list ---"}</td></tr>
+            "1. Write a super awesome to do list app",
+            "2. Write a presentation",
+            "3. Present presentation",
+            "--- End of list ---"
         ];
+
+        let taskElements = tasks.map((task, i) => <tr key={i}><td>{task}</td></tr>);
 
         return (
             <div className="container">
@@ -28,7 +33,7 @@ export default React.createClass({
                         </tr>
                     </thead>
                     <tbody>
-                    {tasks}
+                    {taskElements}
                     </tbody>
                 </table>
             </div>

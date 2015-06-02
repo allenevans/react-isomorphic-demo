@@ -3,17 +3,19 @@
  */
 import React from "react";
 
+import Anchor from "../elements/Anchor.js";
+
 export default React.createClass({
 
     render : function () {
         return <header className="navbar navbar-inverse navbar-fixed-top">
             <div className="container">
                 <div className="navbar-header">
-                    <a className="navbar-brand" href="/">Mega Awesome To Do List</a>
+                    <Anchor className="navbar-brand" href="/">Mega Awesome To Do List</Anchor>
                 </div>
                 <div id="navbar" className="navbar-collapse collapse">
                     <ul className="nav navbar-nav">
-                        <li className="active"><a href="/new-todo">New To Do</a></li>
+                        <li className="active"><Anchor href="/new-todo">New To Do</Anchor></li>
                     </ul>
                 </div>
             </div>
