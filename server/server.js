@@ -12,11 +12,16 @@ import expressHandlebars from "express-handlebars";
 import path from "path";
 import App from "../components/App/App.js";
 
+import DefaultLayout from "../components/layouts/DefaultLayout.js";
+import IndexPage from "../components/pages/Index/IndexPage.js";
+
 var handleRoute = (req, res) => {
-    let content = React.renderToString(<App content="Hello react world :)" />);
+    let component = <DefaultLayout page={<IndexPage />} />;
+    let content = React.renderToString(<App content={component} />);
+    let title = (component.props.page && component.props.page.props.title) || null;
 
     res.render("index", {
-        title : "Hello to you",
+        title : title,
         content : content
     });
 };
@@ -32,11 +37,7 @@ app.set("views", path.join(process.cwd(), "server/views"));
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 
-app.use("/public", express.static(path.join(process.cwd(), "./server/public/")));
-app.use("/public/*", (req, res) => {
-    // prevent calls to static resources from carrying on to the component router.
-    res.end();
-});
+app.use("/public", express.static(path.join(process.cwd(), "./build/server/public/")));
 app.get("*", handleRoute);
 
 var port = process.env.PORT || 3434;
