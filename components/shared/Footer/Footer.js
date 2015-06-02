@@ -6,8 +6,11 @@ import React from "react";
 export default React.createClass({
 
     render : function () {
-        return <footer>
-            Mega awesome To Do List | Allen Evans 2015
+        return <footer className="footer">
+            <div className="container">
+                <p className="text-muted">Mega Awesome To Do List | Allen Evans 2015</p>
+            </div>
+
         </footer>;
     }
 });

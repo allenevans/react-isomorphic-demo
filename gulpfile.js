@@ -26,6 +26,7 @@ gulp.task("build:server", function () {
     return gulp.src([
         "!./build/**/*",
         "!./client/**/*",
+        "!./bower_components/**/*",
         "!./node_modules/**/*",
         "!./server/public/**/*",
         "!./*.js",
@@ -58,7 +59,21 @@ gulp.task("build:client", function () {
         pipe(gulp.dest("./build/server/public/compiled"));
 });
 
-gulp.task("build", ["build:public", "build:server", "build:client"]);
+gulp.task("build:css", function () {
+    return gulp.src([
+        "./bower_components/bootstrap/dist/css/**/*"
+    ]).
+        pipe(gulp.dest("./build/server/public/css"));
+});
+
+gulp.task("build:fonts", function () {
+    return gulp.src([
+        "./bower_components/bootstrap/dist/fonts/**/*"
+    ]).
+        pipe(gulp.dest("./build/server/public/fonts"));
+});
+
+gulp.task("build", ["build:public", "build:server", "build:client", "build:css", "build:fonts"]);
 
 gulp.task("default", function (callback) {
     runSequence(

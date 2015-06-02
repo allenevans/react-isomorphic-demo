@@ -1,0 +1,21 @@
+{
+  "name": "react-isomorphic-demo",
+  "version": "0.0.1",
+  "homepage": "https://github.com/allenevans/react-isomorphic-demo",
+  "authors": [
+    "Allen Evans <allenevans@hotmail.com>"
+  ],
+  "description": "A very basic react application demo for a presentation.",
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}
