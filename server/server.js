@@ -10,11 +10,14 @@ import React from "react";
 import express from "express";
 import expressHandlebars from "express-handlebars";
 import path from "path";
+import App from "../components/App/App.js";
 
 var handleRoute = (req, res) => {
+    let content = React.renderToString(<App content="Hello react world :)" />);
+
     res.render("index", {
         title : "Hello to you",
-        content : "Hello world :)"
+        content : content
     });
 };
 
