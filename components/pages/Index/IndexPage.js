@@ -3,22 +3,20 @@
  */
 import React from "react";
 
+import _Store from "../../../stores/_Store.js";
+
 const defaultProps = {
-    title : "The super mega awesome to do list"
+    title : "The super mega awesome to do list",
+    toDoStore : {}
 };
 
 export default React.createClass({
     getDefaultProps : () => defaultProps,
 
     render : function() {
-        var tasks = [
-            "1. Write a super awesome to do list app",
-            "2. Write a presentation",
-            "3. Present presentation",
-            "--- End of list ---"
-        ];
+        let toDoStore = this.props.stores[0].toDoStore;
 
-        let taskElements = tasks.map((task, i) => <tr key={i}><td>{task}</td></tr>);
+        let taskElements = toDoStore.tasks && toDoStore.tasks.map((task, i) => <tr key={i}><td>{task}</td></tr>);
 
         return (
             <div className="container">
