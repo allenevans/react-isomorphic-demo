@@ -41,9 +41,6 @@ var handleRoute = (req, res) => {
 
             if (title === null) { console.warn("Document title should not be null."); }
 
-            debugger;
-            console.log("render", component.props.page.props.stores);
-
             res.render("index", {
                 title : title,
                 content : content,

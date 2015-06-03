@@ -15,6 +15,16 @@ const defaultProps = {
 export default React.createClass({
     getDefaultProps : () => defaultProps,
 
+    componentDidMount : function () {
+        let toDoStore = this.props.stores[0].toDoStore;
+
+        toDoStore.on("change", function () {
+            if (this.isMounted()) {
+                this.setState({});
+            }
+        }.bind(this));
+    },
+
     render : function() {
         let toDoStore = this.props.stores[0].toDoStore;
 

@@ -2,13 +2,18 @@
  * File         :   _Store.js
  * Description  :   Store superclass.
  * ------------------------------------------------------------------------------------------------ */
+import { EventEmitter } from "events"
 import { canUseDOM } from "react/lib/ExecutionEnvironment";
 import strings from "../utils/strings";
 
 var storagePtr = Symbol();
+var eventPtr = Symbol();
+var data = {};
+
 export default class _Store {
     constructor() {
-        this[storagePtr] = {};
+        this[storagePtr] = canUseDOM ? data : {};
+        this[eventPtr] = new EventEmitter();
         this.isInitialized = false;
 
         if (canUseDOM) {
@@ -19,6 +24,7 @@ export default class _Store {
                 let data = storeState[strings.lowerCaseFirst(storeKey)];
 
                 data && this.hydrate(JSON.parse(data));
+                stateElement.innerText = "";
             }
         }
     }
@@ -27,16 +33,28 @@ export default class _Store {
         return this[storagePtr];
     }
 
+    get eventEmitter_() {
+        return this[eventPtr];
+    }
+
     initialize() {
         return Promise.resolve();
     }
 
     hydrate(state) {
-        this[storagePtr] = state || {};
+        if (!this.isInitialized) {
+            console.log(this.constructor.name, "hydrating");
+            this[storagePtr] = state || {};
+        }
         this.isInitialized = true;
     }
 
     serialize() {
         return JSON.stringify(this[storagePtr]);
+    }
+
+    on(event, func) {
+        console.log("listen to", event, this.constructor.name);
+        this.eventEmitter_.on(event, func.bind(this));
     }
 };

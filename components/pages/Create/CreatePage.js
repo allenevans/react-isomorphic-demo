@@ -3,6 +3,8 @@
  */
 import React from "react";
 
+// dispatcher
+import dispatcher from "../../../infrastructure/dispatcher";
 import _Store from "../../../stores/_Store.js";
 
 const defaultProps = {
@@ -23,15 +25,16 @@ export default React.createClass({
     },
 
     handleTaskAdd : function() {
+        event.preventDefault();
+
         if (this.state.task) {
             console.log("Add:", this.state.task);
+            dispatcher.handle("ADD_TASK", { task : this.state.task });
         }
 
         this.setState({
             task : ""
         });
-
-        event.preventDefault();
     },
 
     render : function () {

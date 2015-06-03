@@ -16,12 +16,16 @@ import NotFoundPage from "./pages/NotFound/NotFoundPage.js";
 // stores
 import ToDoStore from "../stores/ToDoStore.js";
 
+// dispatcher
+import dispatcher from "../infrastructure/dispatcher";
+
 let routes = {
     "^/$" : {
         stores : [ToDoStore],
         get : (stores) => <DefaultLayout page={<IndexPage stores={stores}/>} />
     },
     "^/new-todo" : {
+        stores : [ToDoStore],
         get : () => <DefaultLayout page={<CreatePage />}  />
     },
     "*" : {
@@ -47,7 +51,10 @@ export default (url) => new Promise((resolve, reject) => {
                 Promise.all(
                     stores.map((Store) => {
                         let store = new Store();
-                        initializedStores[strings.lowerCaseFirst(store.constructor.name)] = store;
+                        let storeName = strings.lowerCaseFirst(store.constructor.name);
+
+                        initializedStores[storeName] = initializedStores[storeName] || store;
+                        dispatcher.stores[storeName] = initializedStores[storeName];
 
                         return store.initialize();
                     })

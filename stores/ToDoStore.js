@@ -21,22 +21,18 @@ export default class ToDoStore extends _Store {
     }
 
     initialize() {
-        if (this.isInitialized) {
+        if (this.isInitialized || this.tasks.length) {
             return;
         }
 
-        this.isInitialized = true;
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                this.tasks.push(
-                    { task : "1. Write a super awesome to do list app" },
-                    { task : "2. Write a presentation" },
-                    { task : "3. Present presentation" },
-                    { task : "--- End of list ---" }
-                );
+        console.log("Initialize", this.constructor.name);
 
-                resolve();
-            }.bind(this), 100);
-        }.bind(this));
+        this.isInitialized = true;
+        return Promise.resolve();
+    }
+
+    addTask(task) {
+        this.tasks.push(task);
+        this.eventEmitter_.emit("change");
     }
 };
