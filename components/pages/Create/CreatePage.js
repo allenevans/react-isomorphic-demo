@@ -22,15 +22,32 @@ export default React.createClass({
         this.setState({task: event.target.value});
     },
 
+    handleTaskAdd : function() {
+        if (this.state.task) {
+            console.log("Add:", this.state.task);
+        }
+
+        this.setState({
+            task : ""
+        });
+
+        event.preventDefault();
+    },
+
     render : function () {
         return (
             <div>
                 <h1>Add a To Do</h1>
                 <p>
                     <form>
-                        <label>Title</label>
-                        <input type="text" value={this.state.task} onChange={this.handleTaskChange} />
-                        {this.state.task}
+                        <div className="form-group">
+                            <label htmlFor="taskText">Task:</label>
+                            <input id="taskText" type="text" value={this.state.task}
+                                   className="form-control"
+                                   autoComplete="off"
+                                   onChange={this.handleTaskChange} placeholder="Type your to do here..."/>
+                        </div>
+                        <button onClick={this.handleTaskAdd} className="btn btn-default">Add</button>
                     </form>
                 </p>
             </div>
