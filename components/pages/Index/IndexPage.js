@@ -6,6 +6,7 @@ import React from "react";
 import _Store from "../../../stores/_Store";
 
 import TaskList from "../../shared/TaskList/TaskList";
+import Anchor from "../../shared/elements/Anchor.js";
 
 const defaultProps = {
     title : "The super mega awesome to do list",
@@ -35,6 +36,11 @@ export default React.createClass({
                 </div>
 
                 <TaskList tasks={toDoStore.tasks} />
+
+                <br/>
+                <br/>
+                <br/>
+                <Anchor href="/new-todo">New To Do</Anchor>
             </div>
         );
     }

@@ -11,7 +11,7 @@ export default class ToDoStore extends _Store {
     }
 
     get tasks() {
-        this.storage_.tasks = this.storage_.tasks || [];
+        this.storage_.tasks = this.storage_.tasks || [{task : "Pretend task from the pretend database."}];
 
         return this.storage_.tasks;
     }

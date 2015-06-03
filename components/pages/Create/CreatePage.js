@@ -7,6 +7,8 @@ import React from "react";
 import dispatcher from "../../../infrastructure/dispatcher";
 import _Store from "../../../stores/_Store.js";
 
+import page from "page";
+
 const defaultProps = {
     title : "New To Do | Mega awesome To Do List"
 };
@@ -30,6 +32,7 @@ export default React.createClass({
         if (this.state.task) {
             console.log("Add:", this.state.task);
             dispatcher.handle("ADD_TASK", { task : this.state.task });
+            page("/");
         }
 
         this.setState({
@@ -39,7 +42,7 @@ export default React.createClass({
 
     render : function () {
         return (
-            <div>
+            <div className="container">
                 <h1>Add a To Do</h1>
                 <p>
                     <form>
