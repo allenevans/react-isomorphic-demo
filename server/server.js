@@ -32,7 +32,6 @@ var handleRoute = (req, res) => {
             let stores = pageProps.stores && pageProps.stores[0];
             let serializedStores = {};
 
-            console.log("^^", pageProps);
             Object.keys(stores || {}).forEach((propKey) => {
                 if (stores[propKey] instanceof _Store) {
                     let store = stores[propKey];

@@ -3,7 +3,9 @@
  */
 import React from "react";
 
-import _Store from "../../../stores/_Store.js";
+import _Store from "../../../stores/_Store";
+
+import TaskList from "../../shared/TaskList/TaskList";
 
 const defaultProps = {
     title : "The super mega awesome to do list",
@@ -16,24 +18,13 @@ export default React.createClass({
     render : function() {
         let toDoStore = this.props.stores[0].toDoStore;
 
-        let taskElements = toDoStore.tasks && toDoStore.tasks.map((task, i) => <tr key={i}><td>{task}</td></tr>);
-
         return (
             <div className="container">
                 <div className="page-header">
                     <h1>Super duper mega awesome to do list</h1>
                 </div>
 
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>{"To do"}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {taskElements}
-                    </tbody>
-                </table>
+                <TaskList tasks={toDoStore.tasks} />
             </div>
         );
     }
